@@ -14,10 +14,16 @@ class App extends Component {
   render() {
       return (
         <ApolloProvider client={client}>
-            <div className="App" style={{ marginTop: '50px'}}>
-                <h1 className="text-center">GraphQL BookHub</h1>
-                <BookList/>
-                <AddBook/>
+            <div className="app container">
+                <h1 className="text-center">GraphQL BookHub</h1><hr/>
+                <div className="row">                   
+                    <div className="col-lg-6">
+                        <AddBook/>
+                    </div>
+                    <div className="col-lg-6 bookData">
+                        <BookList/>
+                    </div>                   
+                </div>
             </div>
         </ApolloProvider> 
       );

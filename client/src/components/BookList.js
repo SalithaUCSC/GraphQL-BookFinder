@@ -17,8 +17,10 @@ class BookList extends Component {
         }
         else {
             return data.books.map(book => {
-                return (
-                    <li key={book.id} onClick={(e) => this.setState({selected: book.id})}>{book.title}</li>
+                return (                  
+                    <li className="book" key={book.id} onClick={(e) => this.setState({selected: book.id})}>
+                        {book.title}
+                    </li>                    
                 );
             })
         }
@@ -26,11 +28,13 @@ class BookList extends Component {
 
     render() {
         return (
-            <div className="BookList">
-                <ul>
+            <div className="bookList">
+                <div className="bookItems">
                     { this.viewBooks() }
-                </ul>
-                <BookDetails bookId={this.state.selected}/>
+                </div>
+                <div>
+                    <BookDetails bookId={this.state.selected}/>
+                </div>
             </div>
         );
     }

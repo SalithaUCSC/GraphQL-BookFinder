@@ -9,10 +9,10 @@ class BookDetails extends Component {
         if (book) {
             return (
                 <div>
-                    <h2>{book.title}</h2>
-                    <p>{book.category}</p>
-                    <p>{book.author.name}</p>
-                    <p>all books</p>
+                    <h2>{book.title}</h2><hr/>
+                    <p><b>Category : </b>{book.category}</p>
+                    <p><b>Author : </b>{book.author.name}</p>
+                    <p><b>All books written by the author</b></p>
                     <ul>
                     {
                         book.author.books.map(item => {
@@ -26,14 +26,14 @@ class BookDetails extends Component {
             );
         }
         else {
-            return (<div>no book</div>);
+            return (<div>No book selected</div>);
         }
     }
     
     render() {
         return (
-            <div>
-                {this.viewBookDetails()}
+            <div className="bookDetails">
+                <br/>{this.viewBookDetails()}
             </div>
         );
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
-import { getAuthorsQuery, addBookMutation, getBooksQuery } from '../queries/queries';
+import { getAuthorsQuery, addBookMutation, addAuthorMutation, getBooksQuery } from '../queries/queries';
 
 class AddBook extends Component {
 
@@ -9,7 +9,9 @@ class AddBook extends Component {
         this.state = {
             title: '',
             category: '',
-            authorId: ''
+            authorId: '',
+            name: '',
+            age: ''
         }
     }
     viewAuthors() {
@@ -39,9 +41,43 @@ class AddBook extends Component {
         });
     }
 
+    submitAuthorForm(e) {
+        e.preventDefault();
+        // console.log(this.state)
+        this.props.addAuthorMutation({
+            variables: {
+                name: this.state.name,
+                age: this.state.age
+            },
+            refetchQueries: [{query: getAuthorsQuery}]
+        });
+    }
+
     render() {
         return (
-            <div className="container">
+            <div className="addBook">
+                <h4>Add Author</h4><hr/>
+                <form onSubmit={this.submitAuthorForm.bind(this)}>
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">Name</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" name="name" id="name" 
+                           onChange={(e) => this.setState({name: e.target.value})} placeholder="Author Name"/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">Age</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" name="age" id="age" 
+                            onChange={(e) => this.setState({age: e.target.value})} placeholder="Author Age"/>
+                        </div>
+                    </div>
+                    <button className="btn btn-dark submitBtn">+</button>
+                </form>
+
+                <br/><hr/><br/>
+
+                <h4>Add Book</h4><hr/>
                 <form onSubmit={this.submitBookForm.bind(this)}>
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">Title</label>
@@ -67,7 +103,7 @@ class AddBook extends Component {
                             </select>
                         </div>
                     </div>
-                    <button className="btn btn-primary">add</button>
+                    <button className="btn btn-dark submitBtn">+</button>
                 </form>
             </div>
         );
@@ -76,5 +112,6 @@ class AddBook extends Component {
 
 export default compose(
     graphql(getAuthorsQuery, {name: 'getAuthorsQuery'}),
-    graphql(addBookMutation, {name: 'addBookMutation'})
+    graphql(addBookMutation, {name: 'addBookMutation'}),
+    graphql(addAuthorMutation, {name: 'addAuthorMutation'})
 )(AddBook);
