@@ -1,0 +1,25 @@
+{
+  "name": "gqlbookhub",
+  "version": "1.0.0",
+  "description": "gqlbookhub",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "salitha",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.5.0",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-graphql": "^0.8.0",
+    "graphql": "^14.3.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.5.8",
+    "nodemon": "^1.19.0"
+  }
+}
